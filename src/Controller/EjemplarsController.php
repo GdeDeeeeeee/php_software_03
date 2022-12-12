@@ -18,10 +18,22 @@ class EjemplarsController extends AppController
      */
     public function index()
     {
+        
+        $key = $this->request->getQuery('key');
+        if($key){
+            $query = $this->Ejemplars
+            ->find()
+            ->where(['Ejemplars.editorial LIKE' => "%$key%"]);
+        }
+        else{
+            $query = $this->Ejemplars;
+        }
         $this->paginate = [
             'contain' => ['Libros'],
         ];
-        $ejemplars = $this->paginate($this->Ejemplars);
+        $ejemplars = $this->paginate($query);
+
+        // $ejemplars = $this->paginate($this->Ejemplars);
 
         $this->set(compact('ejemplars'));
     }

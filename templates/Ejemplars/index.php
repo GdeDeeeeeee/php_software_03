@@ -5,8 +5,21 @@
  */
 ?>
 <div class="ejemplars index content">
+<?= $this->Html->link(__('Logout'),['action' => '../users/logout'],['class' => 'button float-right']) ?>
+
     <?= $this->Html->link(__('New Ejemplar'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Ejemplars') ?></h3>
+
+     <!-- Formulario de búsqueda -->
+     <?= $this->Form->create(null, ['type' => 'get']) ?>
+    <?= $this->Form->control('key',
+    ['label' => 'Buscar',
+    'placeholder' => 'Ingrese editorial de ejemplar',
+    'value' => $this->request->getQuery('key')]) ?>
+    <?= $this->Form->button(__('Buscar', ['action' => 'index'])) ?>
+    <?= $this->Form->end() ?>
+
+
     <div class="table-responsive">
         <table>
             <thead>

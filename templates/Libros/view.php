@@ -4,7 +4,14 @@
  * @var \App\Model\Entity\Libro $libro
  */
 ?>
+<!-- <div> 
+<?= $this->Html->link(__('Logout'),['action' => '../users/logout'],['class' => 'button float-right']) ?>
+
+</div> -->
+
+
 <div class="row">
+
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
@@ -14,7 +21,9 @@
             <?= $this->Html->link(__('New Libro'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
+
     <div class="column-responsive column-80">
+
         <div class="libros view content">
             <h3><?= h($libro->id) ?></h3>
             <table>

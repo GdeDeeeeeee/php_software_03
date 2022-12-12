@@ -5,10 +5,21 @@
  */
 ?>
 <div class="autors index content">
+<?= $this->Html->link(__('Logout'),['action' => '../users/logout'],['class' => 'button float-right']) ?>
+
     <?= $this->Html->link(__('New Autor'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Autors') ?></h3>
+      <!-- Formulario de búsqueda -->
+      <?= $this->Form->create(null, ['type' => 'get']) ?>
+    <?= $this->Form->control('key',
+    ['label' => 'Buscar',
+    'placeholder' => 'Ingrese nombre de autor',
+    'value' => $this->request->getQuery('key')]) ?>
+    <?= $this->Form->button(__('Buscar', ['action' => 'index'])) ?>
+    <?= $this->Form->end() ?>
     <div class="table-responsive">
         <table>
+
             <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
@@ -26,7 +37,7 @@
                     <td><?= $this->Number->format($autor->id) ?></td>
                     <td><?= h($autor->nombre) ?></td>
                     <td><?= h($autor->pais) ?></td>
-                    <td><?= h($autor->imagen) ?></td>
+                    <td><img src='<?= h($autor->imagen) ?>' /></td>
                     <td><?= h($autor->created) ?></td>
                     <td><?= h($autor->modified) ?></td>
                     <td class="actions">
@@ -49,4 +60,5 @@
         </ul>
         <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
+  
 </div>

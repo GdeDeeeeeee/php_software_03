@@ -18,7 +18,19 @@ class AutorsController extends AppController
      */
     public function index()
     {
-        $autors = $this->paginate($this->Autors);
+        $key = $this->request->getQuery('key');
+        if($key){
+        $query = $this->Autors
+        ->find()
+        ->where(['Autors.nombre LIKE' => "%$key%"]);
+
+        }
+        else{
+        $query = $this->Autors;
+        }
+        $autors = $this->paginate($query);
+
+        // $autors = $this->paginate($this->Autors);
 
         $this->set(compact('autors'));
     }

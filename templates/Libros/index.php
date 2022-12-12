@@ -4,9 +4,26 @@
  * @var iterable<\App\Model\Entity\Libro> $libros
  */
 ?>
+
 <div class="libros index content">
+<?= $this->Html->link(__('Logout'),['action' => '../users/logout'],['class' => 'button float-right']) ?>
+
     <?= $this->Html->link(__('New Libro'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+
+
     <h3><?= __('Libros') ?></h3>
+
+
+    <!-- Formulario de búsqueda -->
+    <?= $this->Form->create(null, ['type' => 'get']) ?>
+    <?= $this->Form->control('key',
+    ['label' => 'Buscar',
+    'placeholder' => 'Ingrese nombre de libro',
+    'value' => $this->request->getQuery('key')]) ?>
+    <?= $this->Form->button(__('Buscar', ['action' => 'index'])) ?>
+    <?= $this->Form->end() ?>
+
+
     <div class="table-responsive">
         <table>
             <thead>

@@ -18,10 +18,23 @@ class LibrosController extends AppController
      */
     public function index()
     {
+        $key = $this->request->getQuery('key');
+        if($key){
+        $query = $this->Libros
+        ->find()
+        ->where(['Libros.titulo LIKE' => "%$key%"]);
+
+        }
+        else{
+        $query = $this->Libros;
+        }
+
         $this->paginate = [
             'contain' => ['Autors'],
         ];
-        $libros = $this->paginate($this->Libros);
+        $libros = $this->paginate($query);
+
+        // $libros = $this->paginate($this->Libros);
 
         $this->set(compact('libros'));
     }
