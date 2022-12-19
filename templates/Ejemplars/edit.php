@@ -25,6 +25,8 @@
                 <?php
                     echo $this->Form->control('isbn');
                     echo $this->Form->control('editorial');
+                    echo $this->Form->control('precio', ['min' => 0.01]);
+                    echo $this->Form->control('stock', ['min' => 1]);
                     echo $this->Form->control('cantidad');
                     echo $this->Form->control('libro_id', ['options' => $libros]);
                 ?>

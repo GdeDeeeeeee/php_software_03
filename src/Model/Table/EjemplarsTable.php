@@ -51,6 +51,9 @@ class EjemplarsTable extends Table
             'foreignKey' => 'libro_id',
             'joinType' => 'INNER',
         ]);
+        $this->hasMany('Ventas', [
+            'foreignKey' => 'ejemplar_id',
+        ]);
     }
 
     /**
@@ -71,6 +74,16 @@ class EjemplarsTable extends Table
             ->scalar('editorial')
             ->maxLength('editorial', 100)
             ->allowEmptyString('editorial');
+
+        $validator
+            ->decimal('precio')
+            ->requirePresence('precio', 'create')
+            ->notEmptyString('precio');
+
+        $validator
+            ->integer('stock')
+            ->requirePresence('stock', 'create')
+            ->notEmptyString('stock');
 
         $validator
             ->integer('cantidad')

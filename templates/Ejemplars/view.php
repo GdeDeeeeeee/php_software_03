@@ -35,6 +35,14 @@
                     <td><?= $this->Number->format($ejemplar->id) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Precio') ?></th>
+                    <td><?= $this->Number->format($ejemplar->precio) ?></td>
+                </tr>
+                <tr>
+                    <th><?= __('Stock') ?></th>
+                    <td><?= $this->Number->format($ejemplar->stock) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Cantidad') ?></th>
                     <td><?= $ejemplar->cantidad === null ? '' : $this->Number->format($ejemplar->cantidad) ?></td>
                 </tr>

@@ -6,21 +6,18 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Ejemplar Entity
+ * Venta Entity
  *
  * @property int $id
- * @property string|null $isbn
- * @property string|null $editorial
- * @property string $precio
- * @property int $stock
- * @property int|null $cantidad
- * @property int $libro_id
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property int $ejemplar_id
+ * @property int $cantidad
+ * @property string|null $observaciones
  * @property \Cake\I18n\FrozenTime|null $created
+ * @property \Cake\I18n\FrozenTime|null $modified
  *
- * @property \App\Model\Entity\Libro $libro
+ * @property \App\Model\Entity\Ejemplar $ejemplar
  */
-class Ejemplar extends Entity
+class Venta extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -32,14 +29,11 @@ class Ejemplar extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
-        'isbn' => true,
-        'editorial' => true,
-        'precio' => true,
-        'stock' => true,
+        'ejemplar_id' => true,
         'cantidad' => true,
-        'libro_id' => true,
-        'modified' => true,
+        'observaciones' => true,
         'created' => true,
-        'libro' => true,
+        'modified' => true,
+        'ejemplar' => true,
     ];
 }

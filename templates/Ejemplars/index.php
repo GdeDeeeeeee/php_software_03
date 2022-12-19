@@ -5,21 +5,8 @@
  */
 ?>
 <div class="ejemplars index content">
-<?= $this->Html->link(__('Logout'),['action' => '../users/logout'],['class' => 'button float-right']) ?>
-
     <?= $this->Html->link(__('New Ejemplar'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Ejemplars') ?></h3>
-
-     <!-- Formulario de búsqueda -->
-     <?= $this->Form->create(null, ['type' => 'get']) ?>
-    <?= $this->Form->control('key',
-    ['label' => 'Buscar',
-    'placeholder' => 'Ingrese editorial de ejemplar',
-    'value' => $this->request->getQuery('key')]) ?>
-    <?= $this->Form->button(__('Buscar', ['action' => 'index'])) ?>
-    <?= $this->Form->end() ?>
-
-
     <div class="table-responsive">
         <table>
             <thead>
@@ -27,6 +14,8 @@
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('isbn') ?></th>
                     <th><?= $this->Paginator->sort('editorial') ?></th>
+                    <th><?= $this->Paginator->sort('precio') ?></th>
+                    <th><?= $this->Paginator->sort('stock') ?></th>
                     <th><?= $this->Paginator->sort('cantidad') ?></th>
                     <th><?= $this->Paginator->sort('libro_id') ?></th>
                     <th><?= $this->Paginator->sort('modified') ?></th>
@@ -40,6 +29,8 @@
                     <td><?= $this->Number->format($ejemplar->id) ?></td>
                     <td><?= h($ejemplar->isbn) ?></td>
                     <td><?= h($ejemplar->editorial) ?></td>
+                    <td><?= $this->Number->format($ejemplar->precio) ?></td>
+                    <td><?= $this->Number->format($ejemplar->stock) ?></td>
                     <td><?= $ejemplar->cantidad === null ? '' : $this->Number->format($ejemplar->cantidad) ?></td>
                     <td><?= $ejemplar->has('libro') ? $this->Html->link($ejemplar->libro->id, ['controller' => 'Libros', 'action' => 'view', $ejemplar->libro->id]) : '' ?></td>
                     <td><?= h($ejemplar->modified) ?></td>

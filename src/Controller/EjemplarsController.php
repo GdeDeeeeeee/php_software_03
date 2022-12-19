@@ -18,22 +18,10 @@ class EjemplarsController extends AppController
      */
     public function index()
     {
-        
-        $key = $this->request->getQuery('key');
-        if($key){
-            $query = $this->Ejemplars
-            ->find()
-            ->where(['Ejemplars.editorial LIKE' => "%$key%"]);
-        }
-        else{
-            $query = $this->Ejemplars;
-        }
         $this->paginate = [
             'contain' => ['Libros'],
         ];
-        $ejemplars = $this->paginate($query);
-
-        // $ejemplars = $this->paginate($this->Ejemplars);
+        $ejemplars = $this->paginate($this->Ejemplars);
 
         $this->set(compact('ejemplars'));
     }
@@ -71,9 +59,7 @@ class EjemplarsController extends AppController
             }
             $this->Flash->error(__('The ejemplar could not be saved. Please, try again.'));
         }
-        $libros = $this->Ejemplars->Libros->find('list',  ['limit' => 200,
-        'keyField' => 'id',
-        'valueField' => 'titulo'])->all();
+        $libros = $this->Ejemplars->Libros->find('list', ['limit' => 200])->all();
         $this->set(compact('ejemplar', 'libros'));
     }
 
@@ -98,9 +84,7 @@ class EjemplarsController extends AppController
             }
             $this->Flash->error(__('The ejemplar could not be saved. Please, try again.'));
         }
-        $libros = $this->Ejemplars->Libros->find('list',['limit' => 200,
-        'keyField' => 'id',
-        'valueField' => 'titulo'])->all();
+        $libros = $this->Ejemplars->Libros->find('list', ['limit' => 200])->all();
         $this->set(compact('ejemplar', 'libros'));
     }
 
