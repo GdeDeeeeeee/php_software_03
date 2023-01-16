@@ -59,7 +59,29 @@ class EjemplarsController extends AppController
             }
             $this->Flash->error(__('The ejemplar could not be saved. Please, try again.'));
         }
-        $libros = $this->Ejemplars->Libros->find('list', ['limit' => 200])->all();
+        // $libros = $this->Ejemplars->Libros->find('list', ['limit' => 200])->all();
+        $consulta = $this->Ejemplars->Libros->find()
+        ->innerJoinWith('Autors')
+        ->select([
+            'Titulo'=>'Libros.titulo',
+            'Autor'=>'Autors.nombre',
+            'Pais'=>'Autors.pais']
+           
+            )
+        ->order(['Titulo' => 'ASC']);
+        // Arreglo con los campos concatenados
+        $libros = $consulta->find('list',
+        ['keyfield' => 'id',
+        'valueField' =>
+        function ($row)
+        {
+        return
+        $row['Titulo'].' - '.
+        $row['Autor'] . ' (' . 
+        $row['Pais']. ')';
+        }
+        ]
+        )->toArray();
         $this->set(compact('ejemplar', 'libros'));
     }
 
@@ -84,7 +106,29 @@ class EjemplarsController extends AppController
             }
             $this->Flash->error(__('The ejemplar could not be saved. Please, try again.'));
         }
-        $libros = $this->Ejemplars->Libros->find('list', ['limit' => 200])->all();
+        // $libros = $this->Ejemplars->Libros->find('list', ['limit' => 200])->all();
+        $consulta = $this->Ejemplars->Libros->find()
+        ->innerJoinWith('Autors')
+        ->select([
+            'Titulo'=>'Libros.titulo',
+            'Autor'=>'Autors.nombre',
+            'Pais'=>'Autors.pais']
+           
+            )
+        ->order(['Titulo' => 'ASC']);
+        // Arreglo con los campos concatenados
+        $libros = $consulta->find('list',
+        ['keyfield' => 'id',
+        'valueField' =>
+        function ($row)
+        {
+        return
+        $row['Titulo'].' - '.
+        $row['Autor'] . ' (' . 
+        $row['Pais']. ')';
+        }
+        ]
+        )->toArray();
         $this->set(compact('ejemplar', 'libros'));
     }
 

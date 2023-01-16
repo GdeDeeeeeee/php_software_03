@@ -59,7 +59,65 @@ class VentasController extends AppController
             }
             $this->Flash->error(__('The venta could not be saved. Please, try again.'));
         }
-        $ejemplars = $this->Ventas->Ejemplars->find('list', ['limit' => 200])->all();
+        // $ejemplars = $this->Ventas->Ejemplars->find('list', ['limit' => 200])->all();
+        //third activity
+        $consulta = $this->Ventas->Ejemplars->find()
+        ->innerJoinWith('Libros')
+        ->select([
+            'id'=>'Ejemplars.id',
+            'isbn'=>'Ejemplars.isbn',
+            'Editorial'=>'Ejemplars.editorial',
+        'Titulo'=>'Libros.titulo'])
+        ->order(['Titulo' => 'ASC']);
+        // Arreglo con los campos concatenados
+        $ejemplars = $consulta->find('list',
+        ['keyfield' => 'id',
+        'valueField' =>
+        function ($row)
+        {
+        return
+        $row['isbn'].' - '.
+        $row['Titulo'].' - '.
+        $row['Editorial'];
+        }
+        ]
+        )->toArray();
+        //two activity
+        // $consulta = $this->Ventas->Ejemplars->find()
+        // ->join([
+        // 'table' => 'Libros',
+        // 'alias' => 'L',
+        // 'type' => 'INNER',
+        // 'conditions' => 'ejemplars.libro_id = L.id',
+        // ])
+        // ->select([
+        //     'id',
+        //     'isbn',
+        //     'Titulo'=>'L.titulo']);
+        //     // Arreglo con los campos concatenados
+        //     $ejemplars = $consulta->find('list',
+        //     ['keyfield' => 'id',
+        //     'valueField' =>
+        //     function ($row)
+        //     {
+        //     return
+        //     $row['isbn'].' - '.
+        //     $row['Titulo'];
+        //     }
+        //     ]
+        //     )->toArray();
+        // $ejemplars = $this->Ventas->Ejemplars->find('list', 
+        // ['limit' => 200,
+        // 'keyfield'=>'id',
+        // 'valueField'=>
+        //     function($row){
+        //         return 
+        //         $row['isbn'].' - ' .
+        //         $row['editorial'];
+        //     }
+        // ])->all();
+
+
         $this->set(compact('venta', 'ejemplars'));
     }
 
@@ -84,7 +142,28 @@ class VentasController extends AppController
             }
             $this->Flash->error(__('The venta could not be saved. Please, try again.'));
         }
-        $ejemplars = $this->Ventas->Ejemplars->find('list', ['limit' => 200])->all();
+        // $ejemplars = $this->Ventas->Ejemplars->find('list', ['limit' => 200])->all();
+        $consulta = $this->Ventas->Ejemplars->find()
+        ->innerJoinWith('Libros')
+        ->select([
+            'id'=>'Ejemplars.id',
+            'isbn'=>'Ejemplars.isbn',
+            'Editorial'=>'Ejemplars.editorial',
+        'Titulo'=>'Libros.titulo'])
+        ->order(['Titulo' => 'ASC']);
+        // Arreglo con los campos concatenados
+        $ejemplars = $consulta->find('list',
+        ['keyfield' => 'id',
+        'valueField' =>
+        function ($row)
+        {
+        return
+        $row['isbn'].' - '.
+        $row['Titulo'].' - '.
+        $row['Editorial'];
+        }
+        ]
+        )->toArray();
         $this->set(compact('venta', 'ejemplars'));
     }
 
